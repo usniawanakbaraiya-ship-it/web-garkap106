@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GARKAP 106 - Garuda Kompetisi Antar Pelajar</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --main: #65743A;
+    --accent: #C9D66F;
+    --dark: #2d3318;
+    --light: #f5f7e8;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://i.ibb.co.com/HDh5zT67/BG-GARKAP.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.85);
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, rgba(45,51,24,0.7) 75%, var(--dark) 100%);
+    z-index: 1;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+  .maskot {
+    width: min(55vw, 260px);
+    height: auto;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+    animation: float 3.5s ease-in-out infinite;
+    margin-bottom: 0.5rem;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .garkap-title-img {
+    width: min(72vw, 320px);
+    height: auto;
+    filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.6));
+    margin-bottom: 0.4rem;
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .hero-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(0.7rem, 2.5vw, 1rem);
+    color: var(--light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: rgba(101,116,58,0.45);
+    border: 1.5px solid rgba(201,214,111,0.4);
+    padding: 0.35rem 1.2rem;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-slogan {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(0.72rem, 2.2vw, 0.95rem);
+    color: var(--accent);
+    font-style: italic;
+    max-width: 380px;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SOCIAL ICONS ROW */
+  .social-icons-row {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+  .social-icon-link {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(101,116,58,0.4);
+    border: 1.5px solid rgba(201,214,111,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+  .social-icon-link:hover {
+    background: rgba(201,214,111,0.2);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .social-icon-link img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+  }
+
+  /* COUNTDOWN */
+  .countdown-wrap {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .countdown-title {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .countdown-title img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .countdown-box {
+    background: rgba(101,116,58,0.25);
+    border: 2px solid rgba(201,214,111,0.3);
+    border-radius: 12px;
+    padding: 0.7rem 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .countdown-num {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    color: #C9D66F;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .countdown-label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--light);
+    opacity: 0.7;
+    margin-top: 0.3rem;
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+  .section-title {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-title img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+    border-radius: 2px;
+  }
+  .divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--main), transparent);
+  }
+
+  /* ABOUT */
+  .about-card {
+    background: rgba(101,116,58,0.18);
+    border: 1.5px solid rgba(201,214,111,0.25);
+    border-radius: 16px;
+    padding: 1.5rem;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--light);
+    text-align: justify;
+  }
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .tag {
+    background: rgba(201,214,111,0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+  }
+
+  /* DOC BUTTONS */
+  .doc-links { display: flex; flex-direction: column; gap: 0.8rem; }
+  .doc-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(101,116,58,0.2);
+    border: 1.5px solid rgba(201,214,111,0.2);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+  }
+  .doc-btn:hover {
+    background: rgba(201,214,111,0.15);
+    border-color: var(--accent);
+    transform: translateX(5px);
+  }
+  .doc-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(201,214,111,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-icon img { width: 26px; height: 26px; object-fit: contain; }
+  .doc-arrow { margin-left: auto; color: var(--accent); font-size: 1.1rem; }
+
+  /* PENDAFTARAN */
+  .daftar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 480px) { .daftar-grid { grid-template-columns: 1fr; } }
+  .daftar-card {
+    background: linear-gradient(135deg, rgba(101,116,58,0.3), rgba(201,214,111,0.1));
+    border: 2px solid rgba(201,214,111,0.3);
+    border-radius: 16px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .daftar-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px rgba(201,214,111,0.2);
+  }
+  .daftar-img { width: 72px; height: 72px; object-fit: contain; }
+  .daftar-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: var(--accent);
+  }
+  .daftar-sub { font-size: 0.78rem; opacity: 0.7; font-weight: 600; }
+  .daftar-cta {
+    background: var(--accent);
+    color: var(--dark);
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-top: 0.3rem;
+  }
+
+  /* LOKASI */
+  .location-card {
+    background: rgba(101,116,58,0.18);
+    border: 1.5px solid rgba(201,214,111,0.25);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .location-map {
+    width: 100%;
+    height: 220px;
+    border: none;
+    display: block;
+  }
+  .location-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    color: var(--white);
+    transition: background 0.2s;
+  }
+  .location-info:hover { background: rgba(201,214,111,0.08); }
+  .location-icon { width: 36px; height: 36px; object-fit: contain; flex-shrink: 0; }
+  .location-name { font-weight: 800; font-size: 1rem; color: var(--accent); }
+  .location-sub { font-size: 0.82rem; opacity: 0.7; margin-top: 0.2rem; }
+  .location-arrow { margin-left: auto; color: var(--accent); font-size: 1.2rem; }
+
+  /* CONTACT */
+  .contact-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(101,116,58,0.18);
+    border: 1.5px solid rgba(201,214,111,0.2);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.25s;
+  }
+  .contact-card:hover {
+    border-color: var(--accent);
+    background: rgba(201,214,111,0.1);
+    transform: translateX(5px);
+  }
+  .contact-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--main), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--dark);
+    flex-shrink: 0;
+  }
+  .contact-name { font-weight: 800; font-size: 0.93rem; }
+  .contact-num { font-size: 0.8rem; opacity: 0.65; margin-top: 0.1rem; }
+  .wa-icon { margin-left: auto; flex-shrink: 0; }
+  .wa-icon img { width: 30px; height: 30px; object-fit: contain; }
+
+  /* MUSIC PLAYER */
+  .music-player {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    z-index: 999;
+    background: rgba(45,51,24,0.92);
+    border: 1.5px solid rgba(201,214,111,0.4);
+    border-radius: 50px;
+    padding: 0.6rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .music-player:hover { border-color: var(--accent); }
+  .music-note {
+    font-size: 1.2rem;
+    animation: spin 2s linear infinite;
+  }
+  .music-note.paused { animation-play-state: paused; }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .music-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem 5rem;
+    font-size: 0.8rem;
+    opacity: 0.45;
+    color: var(--light);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="https://www.youtube.com/watch?v=7GYHLTmcOdE" type="audio/mpeg">
+</audio>
+
+<!-- MUSIC PLAYER BUTTON -->
+<div class="music-player" onclick="toggleMusic()" id="musicBtn">
+  <span class="music-note" id="musicNote">🎵</span>
+  <span class="music-label" id="musicLabel">MUSIK</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <img class="maskot" src="https://i.ibb.co.com/Gvknmn4x/MASKOT-removebg-preview.png" alt="Maskot Garkap 106">
+    <img class="garkap-title-img" src="https://i.ibb.co.com/zhqrFmqL/GARKAP-removebg-preview.png" alt="GARKAP">
+    <div class="hero-subtitle">Garuda Kompetisi Antar Pelajar</div>
+    <div class="hero-slogan">🦅 Spread your wings and show your potential like an eagle fly through the mountain 🗻</div>
+
+    <!-- SOCIAL ICONS -->
+    <div class="social-icons-row">
+      <a href="https://www.instagram.com/garkap.106" target="_blank" class="social-icon-link">
+        <img src="https://i.ibb.co.com/nqkTk6kd/ICON-IG-removebg-preview.png" alt="Instagram">
+      </a>
+      <a href="https://www.tiktok.com/@garkap106_" target="_blank" class="social-icon-link">
+        <img src="https://i.ibb.co.com/N6gwPsZv/ICON-TT-removebg-preview.png" alt="TikTok">
+      </a>
+      <a href="https://youtube.com/@garkap106?si=rkVCWrcOjgUtPHzL" target="_blank" class="social-icon-link">
+        <img src="https://i.ibb.co.com/C5tjdsV2/ICON-YT-removebg-preview.png" alt="YouTube">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-wrap">
+  <div class="countdown-title"><img src="https://i.ibb.co.com/jvBQztpj/COUNTDOWN-removebg-preview.png" alt="countdown"> COUNTDOWN</div>
+  <div class="countdown-grid">
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-days">00</div>
+      <div class="countdown-label">Days</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-hours">00</div>
+      <div class="countdown-label">Hours</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-minutes">00</div>
+      <div class="countdown-label">Minutes</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-seconds">00</div>
+      <div class="countdown-label">Seconds</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- TENTANG EVENT -->
+<div class="section">
+  <h2 class="section-title"><img src="https://i.ibb.co.com/Gvknmn4x/MASKOT-removebg-preview.png" alt=""> Tentang Event</h2>
+  <div class="about-card">
+    <p>GARKAP 106 adalah salah satu bagian dari program kerja <strong>OSIS & MPK SMA Negeri 106 Jakarta</strong>. Kegiatan ini merupakan event eksternal dan ajang pertandingan Futsal tingkat SMP/MTs/Sederajat dan perlombaan Ratoh Jaroe tingkat SMA/SMK/MA/Sederajat yang bertujuan untuk mencari bibit unggul dan menyalurkan bakat peserta didik di bidang olahraga dan kesenian, lalu 32 tim untuk Futsal dan 20 tim untuk Ratoh Jaroe, dan menargetkan di wilayah Jabodetabek. Event ini akan diadakan di bulan Juli 2026 mendatang.</p>
+    <div class="about-tags">
+      <span class="tag">⚽ Futsal SMP/MTs · 32 Tim</span>
+      <span class="tag">💃 Ratoh Jaroe SMA/SMK · 20 Tim</span>
+      <span class="tag">📍 Jabodetabek</span>
+      <span class="tag">📅 Juli 2026</span>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- PETUNJUK & TEKNIS PENDAFTARAN -->
+<div class="section">
+  <h2 class="section-title">
+    <img src="https://i.ibb.co.com/v6PqY2zM/ICON-GD-removebg-preview.png" alt="">
+    Petunjuk & Teknis Pendaftaran
+  </h2>
+  <div class="doc-links">
+    <a href="https://drive.google.com/drive/folders/1oLoieQQnquf2ID-YSW9BkkJ-Wch8v8rf?usp=sharing" target="_blank" class="doc-btn">
+      <div class="doc-icon"><img src="https://i.ibb.co.com/v6PqY2zM/ICON-GD-removebg-preview.png" alt="Juknis"></div>
+      <div>
+        <div>Petunjuk & Teknis Pendaftaran</div>
+        <div style="font-size:0.78rem;opacity:0.6;font-weight:600">Futsal & Ratoh Jaroe</div>
+      </div>
+      <span class="doc-arrow">→</span>
+    </a>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- GUIDELINES -->
+<div class="section">
+  <h2 class="section-title">
+    <img src="https://i.ibb.co.com/v6PqY2zM/ICON-GD-removebg-preview.png" alt="">
+    Guidelines
+  </h2>
+  <div class="doc-links">
+    <a href="https://drive.google.com/drive/folders/1Rb0lOB1DtWyyFjgyX1oCdNuflZpeF507" target="_blank" class="doc-btn">
+      <div class="doc-icon"><img src="https://i.ibb.co.com/v6PqY2zM/ICON-GD-removebg-preview.png" alt="Guidelines"></div>
+      <div>
+        <div>Guidelines Garkap 106</div>
+        <div style="font-size:0.78rem;opacity:0.6;font-weight:600">Panduan lengkap peserta</div>
+      </div>
+      <span class="doc-arrow">→</span>
+    </a>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- PENDAFTARAN -->
+<div class="section">
+  <h2 class="section-title">
+    <img src="https://i.ibb.co.com/v6PqY2zM/ICON-GD-removebg-preview.png" alt="">
+    Pendaftaran
+  </h2>
+  <div class="daftar-grid">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdSOZy-t-wONb_U8vlCY0vj8CuwZU92EtjJMRnt3afm3z5z9A/viewform" target="_blank" class="daftar-card">
+      <img class="daftar-img" src="https://i.ibb.co.com/2YZx7LQG/FUTSAL-removebg-preview.png" alt="Futsal">
+      <div class="daftar-title">FUTSAL</div>
+      <div class="daftar-sub">SMP/MTs Sederajat</div>
+      <div class="daftar-cta">Daftar Sekarang →</div>
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeOxHXsXnv2jAn1zrbY7-HsHMFyZdp6xLybrTY23SH-9znzfg/viewform" target="_blank" class="daftar-card">
+      <img class="daftar-img" src="https://i.ibb.co.com/nqkr6hFT/RATOH-JAROE-BARU-removebg-preview.png" alt="Ratoeh Jaroe">
+      <div class="daftar-title">RATOEH JAROE</div>
+      <div class="daftar-sub">SMA/MA Sederajat</div>
+      <div class="daftar-cta">Daftar Sekarang →</div>
+    </a>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- LOKASI -->
+<div class="section">
+  <h2 class="section-title">
+    <img src="https://i.ibb.co.com/v4ck6dfM/ICON-LOC-removebg-preview.png" alt="">
+    Lokasi
+  </h2>
+  <div class="location-card">
+    <iframe
+      class="location-map"
+      src="https://maps.google.com/maps?q=SMA+Negeri+106+Jakarta,+Jl.+Gandaria+I+No.12,+RT.12/RW.9,+Pekayon,+Kota+Jakarta+Timur&output=embed"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <a href="https://maps.app.goo.gl/MmsVurCWWw8HbFf98" target="_blank" class="location-info">
+      <img class="location-icon" src="https://i.ibb.co.com/v4ck6dfM/ICON-LOC-removebg-preview.png" alt="Lokasi">
+      <div>
+        <div class="location-name">SMA Negeri 106 Jakarta</div>
+        <div class="location-sub">Buka di Google Maps →</div>
+      </div>
+      <span class="location-arrow">→</span>
+    </a>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="section">
+  <h2 class="section-title">
+    <img src="https://i.ibb.co.com/TXfQQW0/ICON-CP-removebg-preview.png" alt="">
+    Contact Person
+  </h2>
+  <div class="contact-list">
+    <a href="https://wa.me/6282124838961" target="_blank" class="contact-card">
+      <div class="contact-avatar">LH</div>
+      <div>
+        <div class="contact-name">Lutfan Hafiz Zulkarnain</div>
+        <div class="contact-num">+62 821-2483-8961</div>
+      </div>
+      <span class="wa-icon"><img src="https://i.ibb.co.com/TXfQQW0/ICON-CP-removebg-preview.png" alt="WA"></span>
+    </a>
+    <a href="https://wa.me/6285693748970" target="_blank" class="contact-card">
+      <div class="contact-avatar">RA</div>
+      <div>
+        <div class="contact-name">Reyshal Alfaz Ralibi</div>
+        <div class="contact-num">+62 856-9374-8970</div>
+      </div>
+      <span class="wa-icon"><img src="https://i.ibb.co.com/TXfQQW0/ICON-CP-removebg-preview.png" alt="WA"></span>
+    </a>
+  </div>
+</div>
+
+<footer>© 2026 GARKAP 106 · OSIS & MPK SMAN 106 Jakarta</footer>
+
+<script>
+  // COUNTDOWN to 24 July 2026
+  function updateCountdown() {
+    const target = new Date('2026-07-24T00:00:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-minutes').textContent = '00';
+      document.getElementById('cd-seconds').textContent = '00';
+      return;
+    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // MUSIC - using YouTube iframe API workaround
+  let musicPlaying = false;
+  let ytPlayer;
+
+  // Load YouTube IFrame API
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+
+  // Hidden YT iframe
+  const ytDiv = document.createElement('div');
+  ytDiv.id = 'yt-player';
+  ytDiv.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;';
+  document.body.appendChild(ytDiv);
+
+  window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('yt-player', {
+      height: '1', width: '1',
+      videoId: '7GYHLTmcOdE',
+      playerVars: { autoplay: 0, loop: 1, playlist: '7GYHLTmcOdE' },
+      events: { onReady: function(e) { } }
+    });
+  };
+
+  function toggleMusic() {
+    if (!ytPlayer) return;
+    if (musicPlaying) {
+      ytPlayer.pauseVideo();
+      musicPlaying = false;
+      document.getElementById('musicNote').classList.add('paused');
+      document.getElementById('musicLabel').textContent = 'MUSIK';
+    } else {
+      ytPlayer.playVideo();
+      musicPlaying = true;
+      document.getElementById('musicNote').classList.remove('paused');
+      document.getElementById('musicLabel').textContent = 'PAUSE';
+    }
+  }
+</script>
+</body>
+</html>
